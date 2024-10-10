@@ -3,6 +3,7 @@ import { Text, View, StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
 import IconRocket from './iconrocket';
+import IconRobot from './robot';
 
 //https://docs.expo.dev/develop/user-interface/fonts/
 //https://reactsvgicons.com/react-svg-icons-guide
@@ -16,7 +17,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-		<IconRocket width='100' height='100'></IconRocket>
+		<IconRocket width='150' height='150'></IconRocket>
 		<Text style={styles.title}>AppTitle</Text>
 		<Text >¡Te damos la bienvenida!</Text>
 		<View style={styles.inputfieldlabel}>
@@ -27,13 +28,13 @@ export default function Index() {
 			<Text >Contraseña</Text>
 			<TextInput style={styles.input} secureTextEntry="true"></TextInput>
 		</View>
-		<Pressable style={styles.botonconlogo}>
-			<IconRocket width='32' height='32'></IconRocket>
+		<Pressable style={styles.botonconlogo} onPress={()=>{alert("not implemented")}} >
+			<IconRobot width='32' height='32'></IconRobot>
 			<Text>Log in!</Text>
 		</Pressable>
 		<Text >¿No tienes una cuenta?</Text>
 		<Pressable style={styles.botonconlogo}>
-			<IconRocket width='32' height='32'></IconRocket>
+			<IconRobot width='32' height='32'></IconRobot>
 			<Text>Regístrate.</Text>
 		</Pressable>
 
@@ -73,7 +74,10 @@ const styles=StyleSheet.create(
 			flexDirection:'row',
 			alignItems: 'center',
 			padding:5,
-			borderRadius:15
+			borderRadius:5,
+			borderColor:'#000',
+			borderWidth:2,
+			width:150
 		},
 		//#973131 #E0A75E #F9D689 #F5E7B2
 		
