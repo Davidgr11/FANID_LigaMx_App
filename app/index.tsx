@@ -4,6 +4,9 @@ import { Text, View, StyleSheet,
 import { useFonts } from "expo-font";
 import IconRocket from './iconrocket';
 import IconRobot from './robot';
+import { Endpoints } from "@/constants/Endpoints";
+import { useState } from 'react'
+
 
 //https://docs.expo.dev/develop/user-interface/fonts/
 //https://reactsvgicons.com/react-svg-icons-guide
@@ -14,6 +17,29 @@ export default function Index() {
 		'poppins': require('../assets/fonts/PoppinsSemiBold.ttf'),
 	  });
 
+	const [userValue, setUserValue] = useState('');
+	const [passValue, setPassValue] = useState('');
+
+	const onButtonLogin = async ()=>
+	{
+		console.log('logging in!');
+		//hacer la peticion de login
+		//console.log(Endpoints.LOGIN);
+
+		const form = new FormData();
+		form.append('token','code37');
+		form.append('user',userValue);
+		form.append('pass', passValue);
+
+		fetch( Endpoints.LOGIN , {
+			method:'POST',
+			body:form
+		})
+		.then( response=>response.json())
+		.then( data => {console.log(data) })
+		.catch( err=>{console.log(err)});
+	}
+
 
   return (
     <View style={styles.container}>
@@ -22,13 +48,9 @@ export default function Index() {
 		<Text >¡Te damos la bienvenida!</Text>
 		<View style={styles.inputfieldlabel}>
 			<Text >Usuario</Text>
-			<TextInput style={styles.input}></TextInput>
+			<TextInput style={styles.input} onChangeText={setUserValue}     secureTextEntry></TextInput>
 		</View>
-		<View style={styles.inputfieldlabel}>
-			<Text >Contraseña</Text>
-			<TextInput style={styles.input} secureTextEntry="true"></TextInput>
-		</View>
-		<Pressable style={styles.botonconlogo} onPress={()=>{alert("not implemented")}} >
+		<Pressable style={styles.botonconlogo} onPress={onButtonLogin} >
 			<IconRobot width='32' height='32'></IconRobot>
 			<Text>Log in!</Text>
 		</Pressable>
